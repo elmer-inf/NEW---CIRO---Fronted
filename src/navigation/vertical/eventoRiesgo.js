@@ -1,4 +1,4 @@
-import { Home, Circle, Calendar } from 'react-feather'
+import { Circle, Calendar } from 'react-feather'
 
 export default [
   {

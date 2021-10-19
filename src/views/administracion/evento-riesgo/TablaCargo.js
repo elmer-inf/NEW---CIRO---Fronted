@@ -6,7 +6,7 @@ import bootstrap from '@src/assets/images/icons/bootstrap.svg'
 import avatar1 from '@src/assets/images/portrait/small/avatar-s-5.jpg'
 import avatar2 from '@src/assets/images/portrait/small/avatar-s-6.jpg'
 import avatar3 from '@src/assets/images/portrait/small/avatar-s-7.jpg'
-import { MoreVertical, Edit, Trash } from 'react-feather'
+import { MoreVertical, Edit, Trash, Eye } from 'react-feather'
 import { Table, Badge, UncontrolledDropdown, DropdownMenu, DropdownItem, DropdownToggle } from 'reactstrap'
 
 const avatarGroupData1 = [
@@ -109,7 +109,7 @@ const TableHoverAnimation = () => {
         <tr>
           <td>
             <img className='mr-75' src={angular} alt='angular' height='20' width='20' />
-            <span className='align-middle font-weight-bold'>Angular Project</span>
+            <span className='align-middle font-weight-bold'>Angular Project CC</span>
           </td>
           <td>Peter Charles</td>
           <td>
@@ -127,10 +127,13 @@ const TableHoverAnimation = () => {
               </DropdownToggle>
               <DropdownMenu right>
                 <DropdownItem href='/' onClick={e => e.preventDefault()}>
-                  <Edit className='mr-50' size={15} /> <span className='align-middle'>Edit</span>
+                  <Eye className='mr-50' size={15} /> <span className='align-middle'>Mostrar</span>
                 </DropdownItem>
                 <DropdownItem href='/' onClick={e => e.preventDefault()}>
-                  <Trash className='mr-50' size={15} /> <span className='align-middle'>Delete</span>
+                  <Edit className='mr-50' size={15} /> <span className='align-middle'>Editar</span>
+                </DropdownItem>
+                <DropdownItem href='/' onClick={e => e.preventDefault()}>
+                  <Trash className='mr-50' size={15} /> <span className='align-middle'>Eliminar</span>
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
@@ -139,7 +142,7 @@ const TableHoverAnimation = () => {
         <tr>
           <td>
             <img className='mr-75' src={react} alt='react' height='20' width='20' />
-            <span className='align-middle font-weight-bold'>React Project</span>
+            <span className='align-middle font-weight-bold'>React Project CC</span>
           </td>
           <td>Ronald Frest</td>
           <td>
@@ -157,10 +160,13 @@ const TableHoverAnimation = () => {
               </DropdownToggle>
               <DropdownMenu right>
                 <DropdownItem href='/' onClick={e => e.preventDefault()}>
-                  <Edit className='mr-50' size={15} /> <span className='align-middle'>Edit</span>
+                  <Eye className='mr-50' size={15} /> <span className='align-middle'>Mostrar</span>
                 </DropdownItem>
                 <DropdownItem href='/' onClick={e => e.preventDefault()}>
-                  <Trash className='mr-50' size={15} /> <span className='align-middle'>Delete</span>
+                  <Edit className='mr-50' size={15} /> <span className='align-middle'>Editar</span>
+                </DropdownItem>
+                <DropdownItem href='/' onClick={e => e.preventDefault()}>
+                  <Trash className='mr-50' size={15} /> <span className='align-middle'>Eliminar</span>
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
@@ -169,7 +175,7 @@ const TableHoverAnimation = () => {
         <tr>
           <td>
             <img className='mr-75' src={vuejs} alt='vuejs' height='20' width='20' />
-            <span className='align-middle font-weight-bold'>Vuejs Project</span>
+            <span className='align-middle font-weight-bold'>Vuejs Project CC</span>
           </td>
           <td>Jack Obes</td>
           <td>
@@ -187,10 +193,13 @@ const TableHoverAnimation = () => {
               </DropdownToggle>
               <DropdownMenu right>
                 <DropdownItem href='/' onClick={e => e.preventDefault()}>
-                  <Edit className='mr-50' size={15} /> <span className='align-middle'>Edit</span>
+                  <Eye className='mr-50' size={15} /> <span className='align-middle'>Mostrar</span>
                 </DropdownItem>
                 <DropdownItem href='/' onClick={e => e.preventDefault()}>
-                  <Trash className='mr-50' size={15} /> <span className='align-middle'>Delete</span>
+                  <Edit className='mr-50' size={15} /> <span className='align-middle'>Editar</span>
+                </DropdownItem>
+                <DropdownItem href='/' onClick={e => e.preventDefault()}>
+                  <Trash className='mr-50' size={15} /> <span className='align-middle'>Eliminar</span>
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
@@ -199,7 +208,7 @@ const TableHoverAnimation = () => {
         <tr>
           <td>
             <img className='mr-75' src={bootstrap} alt='bootstrap' height='20' width='20' />
-            <span className='align-middle font-weight-bold'>Bootstrap Project</span>
+            <span className='align-middle font-weight-bold'>Bootstrap Project CC</span>
           </td>
           <td>Jerry Milton</td>
           <td>
@@ -217,10 +226,13 @@ const TableHoverAnimation = () => {
               </DropdownToggle>
               <DropdownMenu right>
                 <DropdownItem href='/' onClick={e => e.preventDefault()}>
-                  <Edit className='mr-50' size={15} /> <span className='align-middle'>Edit</span>
+                  <Eye className='mr-50' size={15} /> <span className='align-middle'>Mostrar</span>
                 </DropdownItem>
                 <DropdownItem href='/' onClick={e => e.preventDefault()}>
-                  <Trash className='mr-50' size={15} /> <span className='align-middle'>Delete</span>
+                  <Edit className='mr-50' size={15} /> <span className='align-middle'>Editar</span>
+                </DropdownItem>
+                <DropdownItem href='/' onClick={e => e.preventDefault()}>
+                  <Trash className='mr-50' size={15} /> <span className='align-middle'>Eliminar</span>
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>

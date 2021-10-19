@@ -10,6 +10,4 @@ const DefaultRoute = '/administracion/evento-riesgo'
 // ** Merge Routes
 const Routes = AdministracionRoutes
 
-
-export { DefaultRoute, TemplateTitle, Routes } 
-  
+export { DefaultRoute, TemplateTitle, Routes }

@@ -1,12 +1,10 @@
-import { Home, Circle, Calendar } from 'react-feather'
+import { Circle, Calendar } from 'react-feather'
 
 export default [
   {
     id: 'administracion',
     title: 'Administración',
     icon: <Calendar size={20} />,
-    //badge: 'light-warning',
-    badgeText: '2',
     children: [
       {
         id: 'evento-riesgo',
