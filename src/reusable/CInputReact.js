@@ -17,7 +17,7 @@ export const CInputReact = (props) => {
     //console.log("props: ",props)
     return (
         <FormGroup>
-                <Label>{props.label}</Label>
+                {/* <Label>{props.label}</Label> */}
                 <Input
                     type={props.type}
                     id={props.id}
@@ -29,6 +29,7 @@ export const CInputReact = (props) => {
                     placeholder={props.placeholder}
                     style={{ textAlign: props.aling || 'left' }}
                     disabled={props.disabled || false}
+                    row={props.row || null}
 
                 />
             <FormFeedback>{props.errors}</FormFeedback>

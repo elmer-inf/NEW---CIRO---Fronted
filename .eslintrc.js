@@ -4,7 +4,9 @@ module.exports = {
     es6: true,
     browser: true
   },
-
+  "plugins": [
+    "react"
+ ],
   parserOptions: {
     ecmaVersion: 6,
     sourceType: 'module',
@@ -15,7 +17,8 @@ module.exports = {
     }
   },
   rules: {
-    'no-console': 'off',
+    "react/prop-types": 0
+   /*  'no-console': 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
 
     // Best Practices
@@ -69,7 +72,7 @@ module.exports = {
     'no-var': 'error',
     'object-shorthand': 'error',
     'prefer-const': 'error',
-    'prefer-template': 'error'
+    'prefer-template': 'error' */
   }
 
   // rules: {

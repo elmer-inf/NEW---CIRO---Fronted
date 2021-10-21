@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useFormik } from "formik"
 import * as Yup from "yup"
 import { useHistory } from 'react-router-dom'
-import { CInputReact } from './../../../reusable/CInputReact'
+import { CInputReact } from '../../../reusable/CInputReact'
 import {
   Card,
   CardHeader,
@@ -10,41 +10,74 @@ import {
   CardBody,
   FormGroup,
   Col,
-  Input,
   Form,
   Button,
   CustomInput,
   Label
 } from 'reactstrap'
+import { CSelectReact } from '../../../reusable/CSelectReact'
+import { getTablaLista } from './../evento-riesgo/controller/AdminEventoController';
+import { buildSelectTwo } from '../../../functions/Function'
 
-const HorizontalForm = ({initialValuess, optionToSelect, handleOnSubmit}) => {
+/**
+ * 
+ * @param handleOnSubmit : function 
+ * 
+ * @description handleOnSubmit es una funcionm que se recibe del prop y es usada para realizar el post request (guardar regiustros) 
+ * @returns 
+ */
+
+const HorizontalForm = ({ initialValuess, optionToSelect, handleOnSubmit }) => {
 
   const history = useHistory()
+  const [tablaListaOptions, setTablaListaOptions] = useState([])
 
-    const redirect = (e) => {
-      e.preventDefault()
-      history.push('/manage/people')
-    }
-    const formik = useFormik({
-      initialValues: initialValuess,
-      validationSchema: Yup.object().shape(
-        {
-          clave: Yup.string().required('Valores requeridos').min(2).max(18),
-          nombre: Yup.string().required('Valores requeridos').min(2).max(498),
-          descripcion: Yup.string().required('Valores requeridos').min(2).max(498)
-        }
-      ),
-      onSubmit: values => {
-        console.log(values)
-        const data = {
-          ...values,
-          clave: values.clave.toString(),
-          nombre: values.nombre.toString(),
-          descripcion: values.descripcion.toString()
-        }
-        handleOnSubmit(data)
+  const redirect = (e) => {
+    e.preventDefault()
+    history.push('../../evento-riesgo/listar')
+  }
+
+  const formik = useFormik({
+    initialValues: initialValuess,
+    validationSchema: Yup.object().shape(
+      {
+        tablaLista: Yup.mixed().required('Valor requerido'),
+        clave: Yup.string().min(2).max(50), //.required('Valores requeridos')
+        nombre: Yup.string().min(2).max(500).required('Valor requerido'),
+        descripcion: Yup.string().min(2).max(1000),
+
       }
+    ),
+    onSubmit: values => {
+      console.log(values)
+
+      const data = {
+        ...values,
+        tablaLista: values.tablaLista.value,
+        nivel2_id: 0,
+        nivel3_id: 0
+      }
+      console.log('data_____:', data)
+      handleOnSubmit(data)
+    }
   })
+
+  const callApi = () => {
+    getTablaLista()
+      .then(res => {
+        const options = buildSelectTwo(res.data, 'id', 'nombre_tabla', false)
+        console.log('el resposnse de tablaa:: ', res)
+        setTablaListaOptions(options)
+
+      }).catch((error) => {
+        console.log('Error al crear el modelo Persona: ', error)
+        //notificationToast('error', Messages.notification.notOk)
+      })
+  }
+  // Cycle life
+  useEffect(() => {
+    callApi()
+  }, [])
 
   return (
     <Card>
@@ -54,14 +87,36 @@ const HorizontalForm = ({initialValuess, optionToSelect, handleOnSubmit}) => {
 
       <CardBody>
         <Form onSubmit={formik.handleSubmit} autoComplete="off">
+
           <FormGroup row>
-            <Col sm='12'>
-              <CInputReact 
-                label={"Clave"}
+            <Label sm='3' for='clave'>
+              Clave
+            </Label>
+            <Col sm='9'>
+              <CSelectReact
+                label={"Nivel 1"}
+                type={"select"}
+                id={'tablaLista'}
+                placeholder={'Seleccione tablalista'}
+                value={formik.values.tablaLista}
+                onChange={formik.setFieldValue}
+                onBlur={formik.setFieldTouched}
+                error={formik.errors.tablaLista}
+                touched={formik.touched.tablaLista}
+                options={tablaListaOptions}
+              />
+            </Col>
+          </FormGroup>
+
+          <FormGroup row>
+            <Label sm='3' for='clave'>
+              Clave
+            </Label>
+            <Col sm='9'>
+              <CInputReact
                 type={"text"}
                 id={'clave'}
                 placeholder={'Clave'}
-                type={'text'}
                 value={formik.values.clave}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
@@ -72,13 +127,14 @@ const HorizontalForm = ({initialValuess, optionToSelect, handleOnSubmit}) => {
           </FormGroup>
 
           <FormGroup row>
-            <Col sm='12'>
-              <CInputReact 
-                label={"Nombre"}
+            <Label sm='3' for='nombre'>
+              Nombre
+            </Label>
+            <Col sm='9'>
+              <CInputReact
                 type={"text"}
-                id={'nombre' }
-                placeholder={'Nombre' }
-                type={'text'}
+                id={'nombre'}
+                placeholder={'Nombre'}
                 value={formik.values.nombre}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
@@ -89,43 +145,43 @@ const HorizontalForm = ({initialValuess, optionToSelect, handleOnSubmit}) => {
           </FormGroup>
 
           <FormGroup row>
-            <Col sm='12'>
+            <Label sm='3' for='descripcion'>
+              Descripción
+            </Label>
+            <Col sm='9'>
               <CInputReact
-                label={"Descripción"}
-                type={"text"} 
+                type={"textarea"}
                 id={'descripcion'}
                 placeholder={'Descripción'}
-                type={'text'}
                 value={formik.values.descripcion}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 touched={formik.touched.descripcion}
                 errors={formik.errors.descripcion}
+                row={5}
               />
             </Col>
           </FormGroup>
 
           <FormGroup className='mb-0' row>
-          <Col xs={12} sm={12} md={{ size: 2, order: 0, offset: 3 }}>
-                        <Button
-                            color="success"
-                            type="submit"
-                            block
-                            disabled={formik.isSubmitting}
-                        >
-                            Guardar
-                        </Button>
-                    </Col>
-                    <Col xs={12} sm={12} md={{ size: 2, order: 0, offset: 0 }}>
-                        <Button
-                            color="primary"
-                            block
-                            onClick={() => { formik.handleReset() }}
-                            disabled={!formik.dirty || formik.isSubmitting}
-                        >
-                            Limpiar
-                        </Button>
-                    </Col>
+            <Col className='d-flex' md={{ size: 9, offset: 3 }}>
+              <Button
+                className='mr-1'
+                color="primary"
+                type="submit"
+                disabled={formik.isSubmitting}
+              >
+                Guardar
+              </Button>
+
+              <Button
+                outline color='secondary'
+                onClick={() => { formik.handleReset() }}
+                disabled={!formik.dirty || formik.isSubmitting}
+              >
+                Limpiar
+              </Button>
+            </Col>
           </FormGroup>
         </Form>
       </CardBody>
