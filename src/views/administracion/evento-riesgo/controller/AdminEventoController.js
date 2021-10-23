@@ -21,10 +21,14 @@ export const getTablaDescripcionNivel = async (idTabla) => {
     return response
 }
 
-/**
- * This function do a request in order to save a Usuario Model.
- * @param  {Object} data
- */
+export const getTablaDescripcionNivel2 = async (idTabla, idNivel2) => { 
+
+    const uri = HOST.concat('v1/tablaDescripcion/listarNivel2/',idTabla,'/', idNivel2);
+    console.log('URIII  : ', uri)
+    const response = await axios.get(uri)
+    return response
+}
+
  export const postListDescripcion = (data) => {
     const uri = HOST.concat('v1/tablaDescripcion/registrar')
     return axios.post(uri, data);
@@ -33,12 +37,17 @@ export const getTablaDescripcionNivel = async (idTabla) => {
 
 
 
-/**
- * This function do a request in order to save a Usuario Model.
- * @param  {Object} data
- */
- export const putListDescripcion = (id,data) => {
-    const uri = HOST.concat('v1/tablaDescripcion/editar/'+id)
-    return axios.PUT(uri, data);
+
+ export const getTablaDescripcionId = async (id) => {
+    const uri = HOST + 'v1/tablaDescripcion/mostrar/' + id;
+    const response = await axios.get(uri);
+
+    return response;
+
+};
+
+export const editTablaDescripcion = (id, data) => {
+    const uri = HOST + 'v1/tablaDescripcion/editar/' + id;
+    return axios.put(uri, data);
 
 }

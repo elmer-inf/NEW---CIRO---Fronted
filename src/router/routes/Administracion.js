@@ -19,6 +19,10 @@ const AdministracionRoutes = [
   {
     path: '/administracion/registrar', // Submenus
     component: lazy(() => import('../../views/administracion/registrar'))
+  },
+  {
+    path: '/administracion/editar/:id', // Submenus
+    component: lazy(() => import('../../views/administracion/editar'))
   }
 ]
 

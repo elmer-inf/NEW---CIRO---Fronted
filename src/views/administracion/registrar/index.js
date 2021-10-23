@@ -5,7 +5,6 @@ import { ToastContainer, toast } from 'react-toastify'
 import { useHistory } from 'react-router-dom'
 import Formulario from './Formulario'
 import { postListDescripcion } from '../evento-riesgo/controller/AdminEventoController'
-//import { postAdminEvento } from '../registrar/controller/AdminEventoController'
 
 const AdministracionRegistrar = () => {
  
@@ -13,74 +12,41 @@ const AdministracionRegistrar = () => {
   const formValueInitial = {
       tablaLista: null,
       nombre: '',
-      clave: 0,
-      descripcion: ''
+      clave: '',
+      descripcion: '',
+      nivel2_id: null,
+      nivel3_id: null
   }
 
-  const notificationToast = (type, mensaje) => {
-    switch (type) {
-      case 'error':
-        toast.error(mensaje, {
-          position: "top-right",
-          autoClose: Messages.notification.autoClose,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: true
-        })
-        break
-      case 'success':
-        toast.success(mensaje, {
-          position: "top-right",
-          autoClose: Messages.notification.autoClose,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: true
-        })
-        break
-      default:
-        toast(mensaje, {
-          position: "top-right",
-          autoClose: Messages.notification.autoClose,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: true
-        })
-    }
-    setTimeout(() => {
-      history.push('/manage/people')
-      setSpin(false)
-    }, Messages.notification.timeReload)
+  const redirect = (e) => {
+    e.preventDefault()
+    history.push('../evento-riesgo')
   }
 
   const handleOnSubmit = (dataToRequest) =>{
-
     postListDescripcion(dataToRequest)
     .then(response => {
       console.log('response : ', response);
-
+      history.push("../../administracion/evento-riesgo")
     }).catch((error) => {
-      console.log('Error al crear el modelo Persona: ', error)
-      //notificationToast('error', Messages.notification.notOk)
+      console.log('Error al obtener datos: ', error)
     })
-
   }
-
-
-
 
   return (
     <div id=''>
       <Fragment>
-        <BreadCrumbs breadCrumbTitle='Registrar' breadCrumbParent='Administración' breadCrumbActive='Registrar' />
+        <BreadCrumbs breadCrumbTitle='Registrar Parámetro de Evento de Riesgo' breadCrumbParent='Administración' breadCrumbActive='Registrar Parámetro' />
+
+
+
+        
           <Formulario
             initialValuess={formValueInitial}
             optionToSelect={{}}
             handleOnSubmit={handleOnSubmit}
           />
-          <ToastContainer
+          {/* <ToastContainer
             position="top-center"
             autoClose={8000}
             hideProgressBar={false}
@@ -90,7 +56,7 @@ const AdministracionRegistrar = () => {
             pauseOnFocusLoss
             draggable
             pauseOnHover
-          />
+          /> */}
       </Fragment>
     </div>
   )

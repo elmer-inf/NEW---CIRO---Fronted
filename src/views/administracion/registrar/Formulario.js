@@ -3,81 +3,130 @@ import { useFormik } from "formik"
 import * as Yup from "yup"
 import { useHistory } from 'react-router-dom'
 import { CInputReact } from '../../../reusable/CInputReact'
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardBody,
-  FormGroup,
-  Col,
-  Form,
-  Button,
-  CustomInput,
-  Label
-} from 'reactstrap'
+import { Card, CardHeader, CardBody, FormGroup, Col, Form, Button, Label } from 'reactstrap'
 import { CSelectReact } from '../../../reusable/CSelectReact'
-import { getTablaLista } from './../evento-riesgo/controller/AdminEventoController';
+import { getTablaLista, getTablaDescripcionNivel, getTablaDescripcionNivel2 } from '../evento-riesgo/controller/AdminEventoController';
 import { buildSelectTwo } from '../../../functions/Function'
+import Select from 'react-select'
 
 /**
- * 
  * @param handleOnSubmit : function 
- * 
- * @description handleOnSubmit es una funcionm que se recibe del prop y es usada para realizar el post request (guardar regiustros) 
+ * @description handleOnSubmit es una funcionm que se recibe del prop y es usada para realizar el post request (guardar registros) 
  * @returns 
  */
 
-const HorizontalForm = ({ initialValuess, optionToSelect, handleOnSubmit }) => {
-
+const FormularioAdministracionEvento = ({ initialValuess, optionToSelect, handleOnSubmit }) => {
+console.log('-initialValuess>>>>>>', initialValuess)
   const history = useHistory()
-  const [tablaListaOptions, setTablaListaOptions] = useState([])
 
-  const redirect = (e) => {
-    e.preventDefault()
-    history.push('../../evento-riesgo/listar')
-  }
+/*     const redirect = (e) => {
+      e.preventDefault();
+      history.push('/manage/people'); 
+  } */
 
   const formik = useFormik({
     initialValues: initialValuess,
     validationSchema: Yup.object().shape(
       {
-        tablaLista: Yup.mixed().required('Valor requerido'),
-        clave: Yup.string().min(2).max(50), //.required('Valores requeridos')
-        nombre: Yup.string().min(2).max(500).required('Valor requerido'),
+        tablaLista: Yup.mixed().required('Campo obligatorio'),
+        clave: Yup.string().min(2).max(50),
+        nombre: Yup.string().min(2).max(500).required('Campo obligatorio'),
         descripcion: Yup.string().min(2).max(1000),
-
+        nivel2_id: Yup.mixed(),
+        nivel3_id: Yup.mixed(),
       }
     ),
-    onSubmit: values => {
-      console.log(values)
 
+    onSubmit: values => {
       const data = {
         ...values,
         tablaLista: values.tablaLista.value,
-        nivel2_id: 0,
-        nivel3_id: 0
+        nivel2_id: (values.nivel2_id !== null) ? values.nivel2_id.value : 0,
+        nivel3_id: (values.nivel3_id !== null) ? values.nivel3_id.value : 0
       }
-      console.log('data_____:', data)
+      console.log('datos que se enviaran:', values)
+      console.log('datos que se data:', data)
       handleOnSubmit(data)
     }
   })
 
+  /* LISTA LAS TABLAS LISTA*/
+  const [tablaListaOptions, setTablaListaOptions] = useState([])
+
   const callApi = () => {
     getTablaLista()
       .then(res => {
-        const options = buildSelectTwo(res.data, 'id', 'nombre_tabla', false)
-        console.log('el resposnse de tablaa:: ', res)
+        const options = buildSelectTwo(res.data, 'id', 'nombre_tabla', true)
+        //console.log('El response de tabla: ', res.data)
+        //console.log('options : ', options)
         setTablaListaOptions(options)
-
       }).catch((error) => {
-        console.log('Error al crear el modelo Persona: ', error)
+        console.log('Error: ', error)
         //notificationToast('error', Messages.notification.notOk)
       })
   }
-  // Cycle life
+
   useEffect(() => {
-    callApi()
-  }, [])
+    callApi();
+    
+  }, []) //Llama unsa sola vez
+
+
+  /* LISTA TABLA DESCRIPCION NIVEL 2 */
+  const [dataApi2, setDataApi] = useState([])
+
+  const callApi2 = (idTablaDes) => {
+    getTablaDescripcionNivel(idTablaDes)
+      .then(res => {
+        const options = buildSelectTwo(res.data, 'id', 'nombre', true)
+        //console.log('El response de tabla: ', res.data)
+        console.log('options : ', options)
+        setDataApi(options)
+      }).catch((error) => {
+        console.log('Error: ', error)
+        //notificationToast('error', Messages.notification.notOk)
+      })
+  }
+
+  const resetValues = () => {
+    formik.setFieldValue('nivel2_id', null, false);
+    formik.setFieldValue('nivel3_id', null, false)
+  }
+
+  useEffect(() => {
+   if( formik.values.tablaLista !== null){
+    //console.log('formik.values.tablaLista::: ', formik.values.tablaLista.value);
+    const idnivel2 = formik.values.tablaLista.nivel2;
+    callApi2(idnivel2);
+    resetValues();
+   }
+  }, [formik.values.tablaLista])
+
+
+  /* LISTA TABLA DESCRIPCION NIVEL 3 */
+  const [dataApi3, setDataApi3] = useState([])
+
+  const callApi3 = (idTablaDes) => {
+    getTablaDescripcionNivel(idTablaDes)
+      .then(res => {
+        const options = buildSelectTwo(res.data, 'id', 'nombre', true)
+        //console.log('El response de tabla: ', res.data)
+        console.log('options : ', options)
+        setDataApi3(options)
+      }).catch((error) => {
+        console.log('Error: ', error)
+        //notificationToast('error', Messages.notification.notOk)
+      })
+  }
+
+  useEffect(() => {
+   if( formik.values.tablaLista !== null){
+    console.log('formik.values.tablaLista::: ', formik.values.tablaLista.value);
+    const idnivel3 = formik.values.tablaLista.nivel3;
+    callApi3(idnivel3);
+    resetValues();
+   }
+  }, [formik.values.tablaLista])
 
   return (
     <Card>
@@ -86,18 +135,17 @@ const HorizontalForm = ({ initialValuess, optionToSelect, handleOnSubmit }) => {
       </CardHeader>
 
       <CardBody>
+       
         <Form onSubmit={formik.handleSubmit} autoComplete="off">
-
           <FormGroup row>
-            <Label sm='3' for='clave'>
-              Clave
+            <Label sm='3' for='tabla'>
+              Tabla
             </Label>
             <Col sm='9'>
               <CSelectReact
-                label={"Nivel 1"}
                 type={"select"}
                 id={'tablaLista'}
-                placeholder={'Seleccione tablalista'}
+                placeholder={'Seleccionar . . . '}
                 value={formik.values.tablaLista}
                 onChange={formik.setFieldValue}
                 onBlur={formik.setFieldTouched}
@@ -107,6 +155,7 @@ const HorizontalForm = ({ initialValuess, optionToSelect, handleOnSubmit }) => {
               />
             </Col>
           </FormGroup>
+
 
           <FormGroup row>
             <Label sm='3' for='clave'>
@@ -163,6 +212,67 @@ const HorizontalForm = ({ initialValuess, optionToSelect, handleOnSubmit }) => {
             </Col>
           </FormGroup>
 
+          { (formik.values.tablaLista !== null && (formik.values.tablaLista.value == 4 || formik.values.tablaLista.value == 6)) ?
+            <FormGroup row>
+              <Label sm='3' for='nivel2_id'>
+                { (formik.values.tablaLista !== null && (formik.values.tablaLista.value == 4 )) ? 'Área': null }
+                { (formik.values.tablaLista !== null && (formik.values.tablaLista.value == 6 )) ? 'Categoria de tipo de Evento': null }
+              </Label>
+              <Col sm='9'>
+                <CSelectReact
+                  type={"select"}
+                  id={'nivel2_id'}
+                  placeholder={'Seleccionar . . . '}
+                  value={formik.values.nivel2_id}
+                  onChange={formik.setFieldValue}
+                  onBlur={formik.setFieldTouched}
+                  error={formik.errors.nivel2_id}
+                  touched={formik.touched.nivel2_id}
+                  options={dataApi2}
+                />
+              </Col>
+            </FormGroup>
+          : null }
+
+          { (formik.values.tablaLista !== null && (formik.values.tablaLista.value == 7)) ?
+            <FormGroup row>
+              <Label sm='3' for='nivel2_id'>
+                { (formik.values.tablaLista !== null && (formik.values.tablaLista.value == 7 )) ? 'Categoria de tipo de Evento': null }
+              </Label>
+              <Col sm='9'>
+                <CSelectReact
+                  type={"select"}
+                  id={'nivel2_id'}
+                  placeholder={'Seleccionar . . . '}
+                  value={formik.values.nivel2_id}
+                  onChange={formik.setFieldValue}
+                  onBlur={formik.setFieldTouched}
+                  error={formik.errors.nivel2_id}
+                  touched={formik.touched.nivel2_id}
+                  options={dataApi2}
+                />
+              </Col>
+
+              <Label sm='3' for='nivel3'>
+                { (formik.values.tablaLista !== null && (formik.values.tablaLista.value == 7 )) ? 'Sub evento - Basilea': null }
+              </Label>
+              <Col sm='9'>
+                <CSelectReact
+                  type={"select"}
+                  id={'nivel3_id'}
+                  placeholder={'Seleccionar . . . '}
+                  value={formik.values.nivel3_id}
+                  onChange={formik.setFieldValue}
+                  onBlur={formik.setFieldTouched}
+                  error={formik.errors.nivel3_id}
+                  touched={formik.touched.nivel3_id}
+                  options={dataApi3}
+                />
+              </Col>
+            </FormGroup>
+          : null }
+
+
           <FormGroup className='mb-0' row>
             <Col className='d-flex' md={{ size: 9, offset: 3 }}>
               <Button
@@ -188,4 +298,4 @@ const HorizontalForm = ({ initialValuess, optionToSelect, handleOnSubmit }) => {
     </Card>
   )
 }
-export default HorizontalForm
+export default FormularioAdministracionEvento

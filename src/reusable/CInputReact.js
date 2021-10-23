@@ -1,12 +1,7 @@
 import React from 'react'
 
-import {
-    FormGroup,
-    FormFeedback,
-    Input,
-    Label } from 'reactstrap'
+import { FormGroup, FormFeedback, Input, Label } from 'reactstrap'
 export const CInputReact = (props) => {
-
     /**
       <FormGroup>
                 <Label htmlFor="inputIsValid">Input is valid</Label>
@@ -15,24 +10,24 @@ export const CInputReact = (props) => {
               </FormGroup>
      */
     //console.log("props: ",props)
+    
     return (
-        <FormGroup>
-                {/* <Label>{props.label}</Label> */}
-                <Input
-                    type={props.type}
-                    id={props.id}
-                    value={props.value}
-                    onChange={props.onChange}
-                    onBlur={props.onBlur}
-                    valid={props.touched && !props.errors && props.value !== ''}
-                    invalid={props.touched && !!props.errors}
-                    placeholder={props.placeholder}
-                    style={{ textAlign: props.aling || 'left' }}
-                    disabled={props.disabled || false}
-                    row={props.row || null}
-
-                />
-            <FormFeedback>{props.errors}</FormFeedback>
-            </FormGroup>
+      <FormGroup>
+        {/* <Label>{props.label}</Label> */}
+        <Input
+          type={props.type}
+          id={props.id}
+          value={props.value}
+          onChange={props.onChange}
+          onBlur={props.onBlur}
+          valid={props.touched && !props.errors && props.value !== ''}
+          invalid={props.touched && !!props.errors}
+          placeholder={props.placeholder}
+          style={{ textAlign: props.aling || 'left' }}
+          disabled={props.disabled || false}
+          row={props.row || null}
+        />
+        <FormFeedback>{props.errors}</FormFeedback>
+      </FormGroup>
     )
 }

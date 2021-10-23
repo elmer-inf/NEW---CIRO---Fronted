@@ -16,8 +16,8 @@ export const CSelectReact = (props) => {
         <FormGroup>
            {/*  <Label>{props.label}</Label> */}
             <Select
-             className='react-select'
-             classNamePrefix='select'
+                className='react-select'
+                classNamePrefix='select'
                 options={props.options}
                 placeholder={props.placeholder}
                 getOptionValue={option => option.value}

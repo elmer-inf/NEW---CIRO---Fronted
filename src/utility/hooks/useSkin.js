@@ -49,7 +49,7 @@ export const useSkin = () => {
     element.classList.remove(...element.classList)
 
     // ** If skin is not light add skin class
-    if (skin === 'semi-dark') {
+    if (skin === 'dark') {
       element.classList.add(classNames[skin])
     }
   }, [skin])
