@@ -16,7 +16,7 @@ import Select from 'react-select'
  */
 
 const FormularioAdministracionEvento = ({ initialValuess, optionToSelect, handleOnSubmit }) => {
-console.log('-initialValuess>>>>>>', initialValuess)
+  console.log('-initialValuess>>>>>>', initialValuess)
   const history = useHistory()
 
 /*     const redirect = (e) => {
@@ -29,9 +29,9 @@ console.log('-initialValuess>>>>>>', initialValuess)
     validationSchema: Yup.object().shape(
       {
         tablaLista: Yup.mixed().required('Campo obligatorio'),
-        clave: Yup.string().min(2).max(50),
+        clave: Yup.string().min(2).max(50).nullable(),
         nombre: Yup.string().min(2).max(500).required('Campo obligatorio'),
-        descripcion: Yup.string().min(2).max(1000),
+        descripcion: Yup.string().min(2).max(1000).nullable(),
         nivel2_id: Yup.mixed(),
         nivel3_id: Yup.mixed(),
       }
@@ -46,7 +46,7 @@ console.log('-initialValuess>>>>>>', initialValuess)
       }
       console.log('datos que se enviaran:', values)
       console.log('datos que se data:', data)
-      handleOnSubmit(data)
+     // handleOnSubmit(data)
     }
   })
 
@@ -61,7 +61,7 @@ console.log('-initialValuess>>>>>>', initialValuess)
         //console.log('options : ', options)
         setTablaListaOptions(options)
       }).catch((error) => {
-        console.log('Error: ', error)
+        //console.log('Error: ', error)
         //notificationToast('error', Messages.notification.notOk)
       })
   }
@@ -79,11 +79,11 @@ console.log('-initialValuess>>>>>>', initialValuess)
     getTablaDescripcionNivel(idTablaDes)
       .then(res => {
         const options = buildSelectTwo(res.data, 'id', 'nombre', true)
-        //console.log('El response de tabla: ', res.data)
-        console.log('options : ', options)
+        //console.log('El response de tabla call api 2: ', res.data)
+        //console.log('options : ', options)
         setDataApi(options)
       }).catch((error) => {
-        console.log('Error: ', error)
+        //console.log('Error: ', error)
         //notificationToast('error', Messages.notification.notOk)
       })
   }
@@ -102,7 +102,16 @@ console.log('-initialValuess>>>>>>', initialValuess)
    }
   }, [formik.values.tablaLista])
 
+  useEffect(() => {
+    if( formik.values.tablaLista !== null){
+     //console.log('formik.values.tablaLista::: ', formik.values.tablaLista.value);
+     console.log('efect 2: ',formik.values.tablaLista.nivel2 )
+     const idnivel2 = formik.values.tablaLista.nivel2;
+     callApi2(idnivel2);
+    }
+   }, [])
 
+   
   /* LISTA TABLA DESCRIPCION NIVEL 3 */
   const [dataApi3, setDataApi3] = useState([])
 
@@ -111,17 +120,17 @@ console.log('-initialValuess>>>>>>', initialValuess)
       .then(res => {
         const options = buildSelectTwo(res.data, 'id', 'nombre', true)
         //console.log('El response de tabla: ', res.data)
-        console.log('options : ', options)
+        //console.log('options : ', options)
         setDataApi3(options)
       }).catch((error) => {
-        console.log('Error: ', error)
+        //console.log('Error: ', error)
         //notificationToast('error', Messages.notification.notOk)
       })
   }
 
   useEffect(() => {
    if( formik.values.tablaLista !== null){
-    console.log('formik.values.tablaLista::: ', formik.values.tablaLista.value);
+    //console.log('formik.values.tablaLista::: ', formik.values.tablaLista.value);
     const idnivel3 = formik.values.tablaLista.nivel3;
     callApi3(idnivel3);
     resetValues();
@@ -133,9 +142,8 @@ console.log('-initialValuess>>>>>>', initialValuess)
       <CardHeader>
         {/* <CardTitle tag='h4'>Horizontal Form</CardTitle> */}
       </CardHeader>
-
       <CardBody>
-       
+
         <Form onSubmit={formik.handleSubmit} autoComplete="off">
           <FormGroup row>
             <Label sm='3' for='tabla'>
@@ -207,7 +215,7 @@ console.log('-initialValuess>>>>>>', initialValuess)
                 onBlur={formik.handleBlur}
                 touched={formik.touched.descripcion}
                 errors={formik.errors.descripcion}
-                row={5}
+                rows={5}
               />
             </Col>
           </FormGroup>

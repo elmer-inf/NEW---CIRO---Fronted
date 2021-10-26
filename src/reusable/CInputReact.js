@@ -25,7 +25,7 @@ export const CInputReact = (props) => {
           placeholder={props.placeholder}
           style={{ textAlign: props.aling || 'left' }}
           disabled={props.disabled || false}
-          row={props.row || null}
+          rows={props.rows || null}
         />
         <FormFeedback>{props.errors}</FormFeedback>
       </FormGroup>

@@ -42,11 +42,10 @@ const AdministracionEditar = ( { match } ) => {
 
 
   const macthed = (dataResponse) =>{
-
-      var nivel1 = {value: dataResponse.id, label: dataResponse.nombre}
+      var nivel1 = {value: dataResponse.tablaLista.id, label: dataResponse.tablaLista.nombre_tabla, nivel2: dataResponse.tablaLista.nivel2, nivel3: dataResponse.tablaLista.nivel3 }
       var nivel2 = {}
       var nivel3 = {}
-      
+
       if(dataResponse.nivel2_id !== null){
         nivel2 = {value: dataResponse.nivel2_id.id, label: dataResponse.nivel2_id.nombre}
       }
@@ -54,25 +53,18 @@ const AdministracionEditar = ( { match } ) => {
         nivel3 = {value: dataResponse.nivel3_id.id, label: dataResponse.nivel3_id.nombre}
       }
 
-
     const valores = {
-  
       nombre: dataResponse.nombre,
       clave: dataResponse.clave,
       descripcion: dataResponse.descripcion,
       tablaLista: nivel1,
-      nivel2: (dataResponse.nivel2_id !== null) ? nivel2 : null,
-      nivel3: (dataResponse.nivel3_id !== null) ? nivel3 : null
-      
-   
-      //nivel3_id: null
+      nivel2_id: (dataResponse.nivel2_id !== null) ? nivel2 : null,
+      nivel3_id: (dataResponse.nivel3_id !== null) ? nivel3 : null
     }
+    console.log('MATCHEDEDED: ', valores)
 
-
-      
       setformValueToEdit(valores)
-
-}
+  }
 
   const getById = async () => {
     setSpin(true)
@@ -97,14 +89,14 @@ const AdministracionEditar = ( { match } ) => {
 
         {
           spin === true 
-          ? <div>{'Cargando'} </div>
+          ? <div></div>
           : <Formulario
           initialValuess={formValueToEdit}
           optionToSelect={{}}
           handleOnSubmit={handleOnSubmit}
         />
         }
-          
+        
       </Fragment>
     </div>
   )

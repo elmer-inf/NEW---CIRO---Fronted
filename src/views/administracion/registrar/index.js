@@ -38,25 +38,12 @@ const AdministracionRegistrar = () => {
       <Fragment>
         <BreadCrumbs breadCrumbTitle='Registrar Parámetro de Evento de Riesgo' breadCrumbParent='Administración' breadCrumbActive='Registrar Parámetro' />
 
-
-
-        
           <Formulario
             initialValuess={formValueInitial}
             optionToSelect={{}}
             handleOnSubmit={handleOnSubmit}
           />
-          {/* <ToastContainer
-            position="top-center"
-            autoClose={8000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick={false}
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-          /> */}
+
       </Fragment>
     </div>
   )

@@ -1,5 +1,5 @@
 import React from 'react'
-import { UncontrolledDropdown, DropdownMenu, DropdownItem, DropdownToggle } from 'reactstrap'
+import { UncontrolledDropdown, DropdownMenu, DropdownItem, DropdownToggle, UncontrolledTooltip } from 'reactstrap'
 import { MoreVertical, Edit, Trash, Eye, Plus } from 'react-feather'
 
 const ActionFormatter = ({ cell, row, detailFunction, editFunction }) => {
@@ -7,9 +7,12 @@ const ActionFormatter = ({ cell, row, detailFunction, editFunction }) => {
     return (
       <div>
         <UncontrolledDropdown>
-          <DropdownToggle className='icon-btn hide-arrow' color='transparent' size='sm' caret>
+          <DropdownToggle className='icon-btn hide-arrow' color='transparent' size='sm' caret id='UnControlledExample'>
             <MoreVertical size={15} />
           </DropdownToggle>
+          <UncontrolledTooltip placement='top' target='UnControlledExample'>
+            Más opciones
+          </UncontrolledTooltip>
           <DropdownMenu right>
             {/* <DropdownItem
               onClick={() => {
@@ -17,9 +20,7 @@ const ActionFormatter = ({ cell, row, detailFunction, editFunction }) => {
               detailFunction(row) }}>
               <Eye className='mr-50' size={15} /> <span className='align-middle'>Mostrar</span>
             </DropdownItem> */}
-            <DropdownItem 
-                onClick={() => {
-                editFunction(row) }}>
+            <DropdownItem href='#' onClick={() => { editFunction(row) }}>
               <Edit className='mr-50' size={15} /> <span className='align-middle'>Editar</span>
             </DropdownItem>
             <DropdownItem href='/' onClick={e => e.preventDefault()}>

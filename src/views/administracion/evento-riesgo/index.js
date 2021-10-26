@@ -55,7 +55,7 @@ const AdministracionEventosRiesgos = () => {
          align: 'right', */
          //headerFormatter: typeFormatter
      },{
-        dataField: 'x1',
+        dataField: 'acciones',
         text: 'Acciones',
         formatter: (cell, row) => actionFormatter(cell, row)
     }
@@ -128,8 +128,8 @@ const AdministracionEventosRiesgos = () => {
         <Card>
           <CardBody>
             <Row className='justify-content-center'>
-              <Label sm='3' lg='2'>
-                Seleccione tabla
+              <Label sm='3' lg='2' className='font-weight-bold'>
+                Seleccione Tabla
               </Label>
               <Col sm='9' lg='4'>
                 {/* <Select options={tablaListaOptions}/> */}

@@ -39,7 +39,7 @@ export const getTablaDescripcionNivel2 = async (idTabla, idNivel2) => {
 
 
  export const getTablaDescripcionId = async (id) => {
-    const uri = HOST + 'v1/tablaDescripcion/mostrar/' + id;
+    const uri = HOST + 'v1/tablaDescripcion/mostrar2/' + id;
     const response = await axios.get(uri);
 
     return response;
