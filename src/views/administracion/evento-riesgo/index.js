@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import BreadCrumbs from '@components/breadcrumbs'
-import { Card, CardHeader, CardBody, CardTitle, Button, Col, Label, Row, Table, Badge, UncontrolledDropdown, DropdownMenu, DropdownItem, DropdownToggle, FormGroup } from 'reactstrap'
-import { MoreVertical, Edit, Trash, Eye, Plus } from 'react-feather'
+import { Card, CardHeader, CardBody, CardTitle, Button, Col, Label, Row} from 'reactstrap'
+import { Plus } from 'react-feather'
 import BootstrapTable from 'react-bootstrap-table-next';
 import ActionFormatter from '../../../../src/reusable/ActionFormatter';
 
@@ -122,7 +122,7 @@ const AdministracionEventosRiesgos = () => {
 
 
   return (
-    <div id=''>
+    <div id='' className='table-hover-animation'>
       <Fragment>
         <BreadCrumbs breadCrumbTitle='Eventos de Riesgo' breadCrumbParent='Administración' breadCrumbActive='Eventos de Riesgo' />
         <Card>
@@ -168,41 +168,11 @@ const AdministracionEventosRiesgos = () => {
                   columns={columns}
                   bordered={false}
                   striped={true}
+                  hover={false}
                   condensed={true}
                   wrapperClasses="table-responsive"
                   //filter={filterFactory()}
                 />
-                {/*   <Table className='table-hover-animation' responsive>
-                  <thead>
-                    <tr>
-                      <th>Project</th>
-                      <th>Client</th>
-                      <th>Users</th>
-                      <th>Status</th>
-                      <th>Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <img className='mr-75' src={angular} alt='angular' height='20' width='20' />
-                        <span className='align-middle font-weight-bold'>Angular Project</span>
-                      </td>
-                      <td>Peter Charles</td>
-                      <td>
-                        aa
-                      </td>
-                      <td>
-                        <Badge pill color='light-primary' className='mr-1'>
-                          Active
-                        </Badge>
-                      </td>
-                      <td>
-                        
-                      </td>
-                    </tr>
-                  </tbody>
-                </Table> */}
               </CardBody>
             </Card>
           </Col>

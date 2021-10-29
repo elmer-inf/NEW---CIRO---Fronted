@@ -220,7 +220,7 @@ const FormularioAdministracionEvento = ({ initialValuess, optionToSelect, handle
             </Col>
           </FormGroup>
 
-          { (formik.values.tablaLista !== null && (formik.values.tablaLista.value == 4 || formik.values.tablaLista.value == 6)) ?
+          { (formik.values.tablaLista !== null && (formik.values.tablaLista.value == 4 || formik.values.tablaLista.value == 6)) ? // Para nivel 2
             <FormGroup row>
               <Label sm='3' for='nivel2_id'>
                 { (formik.values.tablaLista !== null && (formik.values.tablaLista.value == 4 )) ? 'Área': null }
@@ -242,7 +242,7 @@ const FormularioAdministracionEvento = ({ initialValuess, optionToSelect, handle
             </FormGroup>
           : null }
 
-          { (formik.values.tablaLista !== null && (formik.values.tablaLista.value == 7)) ?
+          { (formik.values.tablaLista !== null && (formik.values.tablaLista.value == 7)) ? // para  nivel 2 y 3
             <FormGroup row>
               <Label sm='3' for='nivel2_id'>
                 { (formik.values.tablaLista !== null && (formik.values.tablaLista.value == 7 )) ? 'Categoria de tipo de Evento': null }

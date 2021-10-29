@@ -26,4 +26,4 @@ const AdministracionRoutes = [
   }
 ]
 
-export default AdministracionRoutes 
+export default AdministracionRoutes

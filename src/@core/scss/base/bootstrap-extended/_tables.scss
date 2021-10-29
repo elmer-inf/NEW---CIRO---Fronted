@@ -58,23 +58,50 @@
 }
 // Table - hover animation
 .table-hover-animation {
-  background-color: $body-bg;
-  thead {
-    th {
-      border-bottom: 0;
-    }
+  table{
+    border-collapse:separate; 
+    border-spacing: 0 1.3rem;
+    padding: 0 0.7rem;
   }
-  th,
-  td {
-    border: 0;
+  .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+    background-color: #f8f8f8;
   }
-  tbody {
-    tr {
-      transition: all 0.25s ease;
-      background-color: $white;
-      &:hover {
+  table th  {
+    background-color: #ededed !important;
+  }
+  
+  tbody{
+    // for table row effects
+    tr{
+      background-color: white;
+      box-shadow: rgba(0,0,0, 0.08) 0px 4px 20px 0px;
+      //cursor: pointer;
+      transition: all .3s ease;
+      border-radius: .5rem;
+      &:hover{
         transform: translateY(-4px);
+        transition: all .3s ease;
       }
+      td:first-child{
+        padding-left: 1rem;
+        border-top-left-radius: .5rem;
+        border-bottom-left-radius: .5rem;
+      }
+      td:last-child{
+        border-top-right-radius: .5rem;
+        border-bottom-right-radius: .5rem;
+      }
+
+      &.selected{
+        td{
+          border-radius: 0;
+        }
+      }
+    }
+    td{
+      padding: 0.8rem;
+      border: none;
+      vertical-align: middle;
     }
   }
 }
@@ -91,6 +118,11 @@
       }
       td:last-child {
         border-bottom-right-radius: $border-radius;
+      }
+      &.selected{
+        td{
+          border-radius: 0;
+        }
       }
     }
   }

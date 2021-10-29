@@ -1,10 +1,11 @@
 import { lazy } from 'react'
 
 const EventoRiesgoRoutes = [
-  // Administracion
+
   {
     path: '/evento-riesgo/listar', // Submenus
-    component: lazy(() => import('../../views/eventoRiesgo/listar'))
+    component: lazy(() => import('../../views/eventoRiesgo/listar')),
+    exact: true
   },
   {
     path: '/evento-riesgo/registrar', // Submenus
@@ -13,5 +14,4 @@ const EventoRiesgoRoutes = [
   }
 ]
 
-export default EventoRiesgoRoutes 
- 
+export default EventoRiesgoRoutes
