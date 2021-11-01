@@ -7,7 +7,7 @@ import PersonalInfo from './seccionFormulario/CategoriaNegocio'
 import AccountDetails from './seccionFormulario/DatosIniciales'
 import {Row, Col} from 'reactstrap'
 
-const WizardHorizontal = () => {
+const EventoRiesgoRegistrar = () => {
   const [stepper, setStepper] = useState(null)
   const ref = useRef(null)
 
@@ -45,4 +45,4 @@ const WizardHorizontal = () => {
   )
 }
 
-export default WizardHorizontal
+export default EventoRiesgoRegistrar

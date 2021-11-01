@@ -48,7 +48,7 @@ const VerticalMenuHeader = props => {
             <span className='brand-logo'>
               <img src={themeConfig.app.appLogoImage} alt='logo' />
             </span>
-            <h2 className='brand-text mb-0'>{themeConfig.app.appName}</h2>
+            <h2 className='brand-logo-name ml-2 mb-0'><img src={themeConfig.app.appName} alt='logo' /></h2>
           </NavLink>
         </li>
         <li className='nav-item nav-toggle'>

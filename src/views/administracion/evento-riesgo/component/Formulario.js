@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { useFormik } from "formik"
 import * as Yup from "yup"
 import { useHistory } from 'react-router-dom'
-import { CInputReact } from '../../../reusable/CInputReact'
+import { CInputReact } from '../../../../reusable/CInputReact'
 import { Card, CardHeader, CardBody, FormGroup, Col, Form, Button, Label } from 'reactstrap'
-import { CSelectReact } from '../../../reusable/CSelectReact'
-import { getTablaLista, getTablaDescripcionNivel, getTablaDescripcionNivel2 } from '../evento-riesgo/controller/AdminEventoController';
-import { buildSelectTwo } from '../../../functions/Function'
+import { CSelectReact } from '../../../../reusable/CSelectReact'
+import { getTablaLista, getTablaDescripcionNivel, getTablaDescripcionNivel2 } from '../controller/AdminEventoController';
+import { buildSelectTwo } from '../../../../functions/Function'
 import Select from 'react-select'
 
 /**
@@ -15,14 +15,9 @@ import Select from 'react-select'
  * @returns 
  */
 
-const FormularioAdministracionEvento = ({ initialValuess, optionToSelect, handleOnSubmit }) => {
+const AdministracionFormularioEvento = ({ initialValuess, optionToSelect, handleOnSubmit }) => {
   console.log('-initialValuess>>>>>>', initialValuess)
   const history = useHistory()
-
-/*     const redirect = (e) => {
-      e.preventDefault();
-      history.push('/manage/people'); 
-  } */
 
   const formik = useFormik({
     initialValues: initialValuess,
@@ -46,7 +41,7 @@ const FormularioAdministracionEvento = ({ initialValuess, optionToSelect, handle
       }
       console.log('datos que se enviaran:', values)
       console.log('datos que se data:', data)
-     // handleOnSubmit(data)
+      handleOnSubmit(data)
     }
   })
 
@@ -306,4 +301,4 @@ const FormularioAdministracionEvento = ({ initialValuess, optionToSelect, handle
     </Card>
   )
 }
-export default FormularioAdministracionEvento
+export default AdministracionFormularioEvento

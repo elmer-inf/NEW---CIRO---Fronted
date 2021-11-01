@@ -12,13 +12,13 @@ export default [
         id: 'riesgos-listar',
         title: 'Listar',
         icon: <Circle size={12} />,
-        navLink: '/evento-riesgo/listar'
+        navLink: '/eventoRiesgo/listar'
       },
       {
         id: 'riesgos-registrar',
         title: 'Registrar',
         icon: <Circle size={12} />,
-        navLink: '/evento-riesgo/registrar'
+        navLink: '/eventoRiesgo/registrar'
       }
     ]
   }

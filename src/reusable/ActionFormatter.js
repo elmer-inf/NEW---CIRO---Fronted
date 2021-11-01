@@ -6,14 +6,14 @@ const ActionFormatter = ({ cell, row, detailFunction, editFunction }) => {
 
     return (
       <div>
-        <UncontrolledDropdown>
+        <UncontrolledDropdown direction='left'>
           <DropdownToggle className='icon-btn hide-arrow' color='transparent' size='sm' caret id='UnControlledExample'>
             <MoreVertical size={15} />
           </DropdownToggle>
           <UncontrolledTooltip placement='top' target='UnControlledExample'>
             Más opciones
           </UncontrolledTooltip>
-          <DropdownMenu right>
+          <DropdownMenu>
             {/* <DropdownItem
               onClick={() => {
               // props.deleteRow(props.row)

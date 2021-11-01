@@ -3,10 +3,10 @@ import BreadCrumbs from '@components/breadcrumbs'
 import { Card, CardTitle, CardBody, CardText, Row, Col } from 'reactstrap'
 import { ToastContainer, toast } from 'react-toastify'
 import { useHistory } from 'react-router-dom'
-import Formulario from './Formulario'
-import { postListDescripcion } from '../evento-riesgo/controller/AdminEventoController'
+import Formulario from './component/Formulario'
+import { postListDescripcion } from './controller/AdminEventoController'
 
-const AdministracionRegistrar = () => {
+const AdministracionEventoRegistrar = () => {
  
   const history = useHistory()
   const formValueInitial = {
@@ -27,7 +27,7 @@ const AdministracionRegistrar = () => {
     postListDescripcion(dataToRequest)
     .then(response => {
       console.log('response : ', response);
-      history.push("../../administracion/evento-riesgo")
+      history.push("/administracion/evento-riesgo/listar")
     }).catch((error) => {
       console.log('Error al obtener datos: ', error)
     })
@@ -48,4 +48,4 @@ const AdministracionRegistrar = () => {
     </div>
   )
 }
-export default AdministracionRegistrar
+export default AdministracionEventoRegistrar

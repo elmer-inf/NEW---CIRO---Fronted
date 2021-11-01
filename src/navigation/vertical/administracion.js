@@ -10,7 +10,7 @@ export default [
         id: 'evento-riesgo',
         title: 'Eventos de Riesgo',
         icon: <Circle size={12} />,
-        navLink: '/administracion/evento-riesgo' 
+        navLink: '/administracion/evento-riesgo/listar'
       },
       {
         id: 'matriz-riesgo',
@@ -26,4 +26,4 @@ export default [
       }
     ]
   }
-] 
+]

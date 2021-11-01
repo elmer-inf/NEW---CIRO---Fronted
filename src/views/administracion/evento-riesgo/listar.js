@@ -3,14 +3,14 @@ import BreadCrumbs from '@components/breadcrumbs'
 import { Card, CardHeader, CardBody, CardTitle, Button, Col, Label, Row} from 'reactstrap'
 import { Plus } from 'react-feather'
 import BootstrapTable from 'react-bootstrap-table-next';
-import ActionFormatter from '../../../../src/reusable/ActionFormatter';
+import ActionFormatter from '../../../reusable/ActionFormatter';
 
 import Select from 'react-select'
 import { useHistory } from 'react-router-dom'
 import { getTablaDescripcionNivel, getTablaLista } from './controller/AdminEventoController'
 import { buildSelectTwo } from '../../../functions/Function'
 
-const AdministracionEventosRiesgos = () => {
+const AdministracionEventoListar = () => {
 
   const [rowTable, setRowTable] = useState(null)
 
@@ -23,7 +23,8 @@ const AdministracionEventosRiesgos = () => {
         dataField: 'clave',
         text: 'Clave',
         sort: true,
-        //hidden : (cell,row) => row.clave === null ? true : false
+        //formatter: columnaVacia
+        //hidden : (row) => row.clave == null ? true : false
        /*  filter: customFilter(),
         filterRenderer: (onFilter, column) =>
             <CFilterText placeholder={'Buscar'} onFilter={handleOnFilter} column={column} handleChildClick={handleChildClick} />, */
@@ -61,6 +62,16 @@ const AdministracionEventosRiesgos = () => {
     }
   ]
 
+  /* function columnaVacia(column) {
+    if (column.clave !== null){
+      return column;
+    }
+    else
+      return {
+        hidden: column.hidden
+      }
+  } */
+
   const actionFormatter = (cell, row) => {
     return <ActionFormatter cell={cell} row={row} detailFunction={detailsRow} editFunction={editRow} />
   }
@@ -74,7 +85,7 @@ const AdministracionEventosRiesgos = () => {
   const editRow = (row) => {
     console.log(row)
     setRowTable(row);
-    history.push('/administracion/editar/' + row.id);
+    history.push('./editar/' + row.id);
   }
 
   const [tablaListaOptions, setTablaListaOptions] = useState([])
@@ -82,7 +93,7 @@ const AdministracionEventosRiesgos = () => {
   const history = useHistory()
 
   const redirect = () => {
-    history.push('/administracion/registrar')
+    history.push('./registrar')
   }
   /* LISTA TABLA LISTA */
   const callApi = () => {
@@ -162,6 +173,9 @@ const AdministracionEventosRiesgos = () => {
               </CardHeader>
               <CardBody className='pb-4'>
                 <BootstrapTable
+                  classes= {'table-hover-animation'}
+                  bootstrap4={true}
+                  sort={ { dataField: 'id', order: 'asc' } }
                   noDataIndication={'No se encontraron resultados'}
                   keyField='id'
                   data={dataApi}
@@ -182,4 +196,4 @@ const AdministracionEventosRiesgos = () => {
   )
 }
 
-export default AdministracionEventosRiesgos
+export default AdministracionEventoListar

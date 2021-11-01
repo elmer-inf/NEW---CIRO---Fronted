@@ -6,7 +6,7 @@ import EventoRiesgoRoutes from './EventoRiesgo'
 const TemplateTitle = '%s - Vuexy React Admin Template'
 
 // ** Default Route
-const DefaultRoute = '/administracion/evento-riesgo'
+const DefaultRoute = '/eventoRiesgo/listar'
 
 // ** Merge Routes
 const Routes = [

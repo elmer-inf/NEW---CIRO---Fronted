@@ -3,10 +3,10 @@ import BreadCrumbs from '@components/breadcrumbs'
 import { Card, CardTitle, CardBody, CardText, Row, Col } from 'reactstrap'
 import { ToastContainer, toast } from 'react-toastify'
 import { useHistory } from 'react-router-dom'
-import Formulario from '../registrar/Formulario'
-import { editTablaDescripcion, getTablaDescripcionId } from '../evento-riesgo/controller/AdminEventoController'
+import Formulario from './component/Formulario'
+import { editTablaDescripcion, getTablaDescripcionId } from './controller/AdminEventoController'
 
-const AdministracionEditar = ( { match } ) => {
+const AdministracionEventoEditar = ( { match } ) => {
  
   const history = useHistory()
   const formValueInitial = {
@@ -18,18 +18,17 @@ const AdministracionEditar = ( { match } ) => {
       nivel3_id: null
   }
 
- 
   const [formValueToEdit, setformValueToEdit] = useState(formValueInitial)
 
   const [spin, setSpin] = useState(false)
-  
+
   const handleOnSubmit = (dataToRequest) => {
     console.log(': ', dataToRequest)
     const idTabDesc = match.params.id;
     editTablaDescripcion(idTabDesc,dataToRequest)
     .then(res => {
       console.log('response : ', res);
-      history.push("../../administracion/evento-riesgo")
+      history.push("/administracion/evento-riesgo/listar")
     }).catch((error) => {
         console.log('Error al obtener datos: ', error);
     });
@@ -101,4 +100,4 @@ const AdministracionEditar = ( { match } ) => {
     </div>
   )
 }
-export default AdministracionEditar
+export default AdministracionEventoEditar

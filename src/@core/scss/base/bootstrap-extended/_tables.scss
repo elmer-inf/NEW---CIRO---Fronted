@@ -59,22 +59,15 @@
 // Table - hover animation
 .table-hover-animation {
   table{
-    border-collapse:separate; 
-    border-spacing: 0 1.3rem;
+    border-collapse:separate;
+    border-spacing: 0 0.7rem;
     padding: 0 0.7rem;
   }
-  .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
-    background-color: #f8f8f8;
-  }
-  table th  {
-    background-color: #ededed !important;
-  }
-  
   tbody{
     // for table row effects
     tr{
-      background-color: white;
-      box-shadow: rgba(0,0,0, 0.08) 0px 4px 20px 0px;
+      background-color: $white;
+      box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 20px 0px;
       //cursor: pointer;
       transition: all .3s ease;
       border-radius: .5rem;

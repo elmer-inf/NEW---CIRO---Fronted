@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import BreadCrumbs from '@components/breadcrumbs'
-import { Card, CardHeader, CardBody, CardTitle, Button, Col, Label, Row, Badge} from 'reactstrap'
+import { Card, CardHeader, CardBody, CardTitle, Button, Col, Table, Row, Badge} from 'reactstrap'
 import { Plus, AlertCircle, Check, Pause, X } from 'react-feather'
 import BootstrapTable from 'react-bootstrap-table-next';
 import ActionFormatter from '../../../src/reusable/ActionFormatter';
@@ -11,7 +11,7 @@ import { getTablaDescripcionNivel, getTablaLista } from './controller/EventoCont
 import { buildSelectTwo } from '../../functions/Function'
 import Alert from 'reactstrap/lib/Alert';
 
-const AdministracionEventosRiesgos = () => {
+const EventoRiesgoListar = () => {
 
   const [rowTable, setRowTable] = useState(null)
 
@@ -127,10 +127,6 @@ const AdministracionEventosRiesgos = () => {
         </Badge>
       );
     }
-
-    return (
-      <span>{ cell }</span>
-    );
   }
 
   const actionFormatter = (cell, row) => {
@@ -146,7 +142,7 @@ const AdministracionEventosRiesgos = () => {
   const editRow = (row) => {
     console.log(row)
     setRowTable(row);
-    history.push('/administracion/editar/' + row.id);
+    history.push('./editar/' + row.id);
   }
 
   const [tablaListaOptions, setTablaListaOptions] = useState([])
@@ -154,7 +150,7 @@ const AdministracionEventosRiesgos = () => {
   const history = useHistory()
 
   const redirect = () => {
-    history.push('/administracion/registrar')
+    history.push('./registrar')
   }
   /* LISTA TABLA LISTA */
   const callApi = () => {
@@ -198,7 +194,6 @@ const AdministracionEventosRiesgos = () => {
       <Fragment>
         <BreadCrumbs breadCrumbTitle='Listado de Eventos de Riesgo' breadCrumbParent='Eventos de Riesgo' breadCrumbActive='Listado de Eventos de Riesgo' />
         <Row>
-          
           <Col sm='12'>
             <Card>
               <CardHeader>
@@ -210,6 +205,7 @@ const AdministracionEventosRiesgos = () => {
               </CardHeader>
               <CardBody className='pb-4'>
               <BootstrapTable
+                  classes= {'table-hover-animation'}
                   bootstrap4={true}
                   sort={ { dataField: 'id', order: 'desc' } }
                   noDataIndication={'No se encontraron resultados'}
@@ -223,36 +219,6 @@ const AdministracionEventosRiesgos = () => {
                   wrapperClasses="table-responsive"
                   //filter={filterFactory()}
                 />
-                {/*   <Table className='table-hover-animation' responsive>
-                  <thead>
-                    <tr>
-                      <th>Project</th>
-                      <th>Client</th>
-                      <th>Users</th>
-                      <th>Status</th>
-                      <th>Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <img className='mr-75' src={angular} alt='angular' height='20' width='20' />
-                        <span className='align-middle font-weight-bold'>Angular Project</span>
-                      </td>
-                      <td>Peter Charles</td>
-                      <td>
-                        aa
-                      </td>
-                      <td>
-                        <Badge pill color='light-primary' className='mr-1'>
-                          Active
-                        </Badge>
-                      </td>
-                      <td>
-                      </td>
-                    </tr>
-                  </tbody>
-                </Table> */}
               </CardBody>
             </Card>
           </Col>
@@ -262,4 +228,4 @@ const AdministracionEventosRiesgos = () => {
   )
 }
 
-export default AdministracionEventosRiesgos
+export default EventoRiesgoListar

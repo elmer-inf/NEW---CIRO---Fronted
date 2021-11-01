@@ -3,15 +3,15 @@
 //Template config options
 const themeConfig = {
   app: {
-    appName: 'Red Enlace',
+    appName: require('@src/assets/images/logo/nombre-logo.png').default,
     appLogoImage: require('@src/assets/images/logo/logo-atc.png').default
   },
   layout: {
     isRTL: false,
     skin: 'semi-dark', // light, dark, bordered, semi-dark
-    routerTransition: 'fadeIn', // fadeIn, fadeInLeft, zoomIn, none or check this for more transition https://animate.style/
+    routerTransition: 'fadeIn', // fadeIn, fadeInLeft, zoomIn, flipInX, fadeInUp, fadeInLeft, fadeInDown, headShake, pulse, zoomInDown, slideInDown, none or check this for more transition https://animate.style/
     type: 'vertical', // vertical, horizontal
-    contentWidth: 'full', // full, boxed 
+    contentWidth: 'full', // full, boxed
     menu: {
       isHidden: false,
       isCollapsed: false
